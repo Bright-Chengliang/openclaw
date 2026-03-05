@@ -5777,6 +5777,7 @@ function isLikelyContextOverflowError(errorMessage) {
 	if (CONTEXT_WINDOW_TOO_SMALL_RE.test(errorMessage)) return false;
 	if (isRateLimitErrorMessage(errorMessage)) return false;
     if (lower.includes("context limit reached") || lower.includes("exceeds model capacity") || lower.includes("conversation size exceeds")) return true;
+	if (lower === "terminated" || lower.includes("unhandled stop reason: terminated")) return true;
 	if (isContextOverflowError(errorMessage)) return true;
 	if (RATE_LIMIT_HINT_RE.test(errorMessage)) return false;
 	return CONTEXT_OVERFLOW_HINT_RE.test(errorMessage);
